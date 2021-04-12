@@ -12,7 +12,7 @@ ruby가 설치되어있어야한다. ( [Windows](https://rubyinstaller.org/downl
 
 ```
 gem install bundler jekyll
-gen install bundler jekyll-paginate
+gem install bundler jekyll-paginate
 
 bundle init
 bundle add jekyll
@@ -20,6 +20,8 @@ bundle add jekyll-paginate
 
 jekyll serve
 ```
+서버가 시작되면, localhost:4000 으로 접근하여 페이지를 확인 할 수 있다.
+
 **jekyll-admin 플러그인 추가하기**
 Gemfile 파일에 아래 코드를 추가해준다
 
@@ -28,3 +30,5 @@ gem 'jekyll-admin', group: :jekyll_plugins
 ```
 
 ![](/public/img/2021_04_12_00.PNG)
+
+서버가 시작되면, localhost:4000/admin 으로 접근하여 admin 페이지를 확인 할 수 있다.

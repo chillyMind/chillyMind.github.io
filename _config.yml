@@ -1,7 +1,7 @@
 # Setup
-title:               Chilog
-tagline:             'chilog'
-description:         'chilog ~'
+title:               Chillog
+tagline:             '머리 식히는 블로그'
+description:         'chillog ~'
 url:                 https://chillyMind.github.io
 baseurl:             ''
 paginate:            5
