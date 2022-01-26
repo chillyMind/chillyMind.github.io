@@ -40,12 +40,22 @@ body {
   overflow-x: hidden;
 }
 
+@font-face {
+  font-family: 'NEXON Lv2 Gothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
-  font-family: "PT Serif", Georgia, "Times New Roman", serif;
+  font-family: 'NEXON Lv2 Gothic';
+  font-weight: normal;
+  font-style: normal;
+  word-spacing: 0.01rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  font-family: "NEXON Lv2 Gothic", Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: #313131;
   letter-spacing: -.025rem;
@@ -75,14 +85,14 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: 28rem;
 }
-@media (min-width: 38em) {
+@media (min-width: 42em) {
   .container {
-    max-width: 32rem;
+    max-width: 40rem;
   }
 }
 @media (min-width: 56em) {
   .container {
-    max-width: 38rem;
+    max-width: 42rem;
   }
 }
 
