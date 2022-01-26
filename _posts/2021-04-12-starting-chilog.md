@@ -32,3 +32,21 @@ gem 'jekyll-admin', group: :jekyll_plugins
 ![](/public/img/2021_04_12_00.PNG)
 
 서버가 시작되면, localhost:4000/admin 으로 접근하여 admin 페이지를 확인 할 수 있다.
+
+
+만약 다음과같은 에러가 뜨면 Gemfile.lock을 지우고 다시 서빙해보면된다.
+```
+E:\workspace\chillog> jekyll serve
+Traceback (most recent call last):
+        10: from C:/Ruby27-x64/bin/jekyll:23:in `<main>'
+         9: from C:/Ruby27-x64/bin/jekyll:23:in `load'
+         8: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/jekyll-4.2.1/exe/jekyll:11:in `<top (required)>'
+         7: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/jekyll-4.2.1/lib/jekyll/plugin_manager.rb:52:in `require_from_bundler'
+         6: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler.rb:148:in `setup'
+         5: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/runtime.rb:26:in `setup'
+         4: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/runtime.rb:26:in `map'
+         3: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/spec_set.rb:163:in `each'
+         2: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/spec_set.rb:163:in `each'
+         1: from C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/runtime.rb:31:in `block in setup'
+C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/bundler-2.2.17/lib/bundler/runtime.rb:302:in `check_for_activated_spec!': You have already activated ffi 1.15.1, but your Gemfile requires ffi 1.15.0. Prepending `bundle exec` to your command may solve this. (Gem::LoadError)
+```
