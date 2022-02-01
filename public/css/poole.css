@@ -53,7 +53,7 @@ html {
 }
 @media (min-width: 38em) {
   html {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
@@ -173,7 +173,7 @@ pre {
 }
 pre code {
   padding: 0;
-  font-size: 100%;
+  font-size: 75%;
   color: inherit;
   background-color: transparent;
 }
@@ -214,16 +214,11 @@ blockquote {
   padding: .5rem 1rem;
   margin: .8rem 0;
   color: #7a7a7a;
+  background-color: #efefef;
   border-left: .25rem solid #e5e5e5;
 }
 blockquote p:last-child {
   margin-bottom: 0;
-}
-@media (min-width: 30em) {
-  blockquote {
-    padding-right: 5rem;
-    padding-left: 1.25rem;
-  }
 }
 
 img {
@@ -285,7 +280,7 @@ tbody tr:nth-child(odd) th {
  */
 
 .container {
-  max-width: 38rem;
+  max-width: 40rem;
   padding-left:  1rem;
   padding-right: 1rem;
   margin-left:  auto;
