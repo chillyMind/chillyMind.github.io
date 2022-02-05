@@ -1,5 +1,7 @@
 ---
+layout: post
 title: 칠로그 시작
+tags: [책읽기,아키텍쳐]
 ---
 
 **Jeykll에 대한 첫 인상**

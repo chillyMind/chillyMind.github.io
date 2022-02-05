@@ -1,10 +1,10 @@
 # Setup
 title:               Chillog
-tagline:             '시험 또 시험'
-description:         'chillog ~'
+tagline:             '차가운 블로그'
+description:         '배움에는 뜨겁고 감성적이게, 개발은 차갑고 이성적으로'
 url:                 https://chillyMind.github.io
 baseurl:             ''
-paginate:            5
+paginate:            10
 permalink:           pretty
 
 # About/contact
