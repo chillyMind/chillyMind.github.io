@@ -1,14 +1,21 @@
 ---
 layout: default
 ---
-
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
+  {% if page.tags %}
+    <div class="tag-container">
+    {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+    {% endfor %}
+    </div>
+  {% endif %}
+  <div style="margin-bottom: 1rem;"></div>
   {{ content }}
 </div>
 
-{% if site.related_posts.size >= 1 %}
+<!-- {% if site.related_posts.size >= 1 %}
 <div class="related">
   <h2>Related posts</h2>
   <ul class="related-posts">
@@ -24,4 +31,4 @@ layout: default
     {% endfor %}
   </ul>
 </div>
-{% endif %}
+{% endif %} -->

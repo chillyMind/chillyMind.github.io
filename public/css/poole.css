@@ -328,6 +328,18 @@ tbody tr:nth-child(odd) th {
   margin-bottom: 4em;
 }
 
+.tag{
+  background-color: #268bd2;
+  padding: 0.4rem;
+  margin: 0.1rem;
+  border-radius: 0.3rem;
+  color: white;
+}
+.tag-container{
+  display: inline-block;
+  height: 2rem;
+}
+
 /* Blog post or page title */
 .page-title,
 .post-title,
@@ -343,7 +355,6 @@ tbody tr:nth-child(odd) th {
 .post-date {
   display: block;
   margin-top: -.5rem;
-  margin-bottom: 1rem;
   color: #9a9a9a;
 }
 
