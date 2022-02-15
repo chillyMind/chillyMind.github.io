@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[책읽기] 마이크로서비스 아키텍쳐 구축"
+title: "'마이크로서비스 아키텍쳐 구축' 책읽기"
 tags: [책읽기,MSA,아키텍쳐]
 ---
 <p align="center" style="color:gray">
