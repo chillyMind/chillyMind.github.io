@@ -9,7 +9,7 @@ tags: [Jekyll]
 * Admin의 UI가 담백하여, 처음 사용하는 사용자가 자연스럽게 사용할 수 있다.
 * [Github Pages](https://pages.github.com/)와  궁합이 잘 맞는다.
 
-**Jekyll 구축해보기**
+**Jekyll 구축해보기**<br/>
 ruby가 설치되어있어야한다. ( [Windows](https://rubyinstaller.org/downloads/) / [Others](https://www.ruby-lang.org/ko/documentation/installation/) )
 
 ```
@@ -24,7 +24,7 @@ jekyll serve
 ```
 서버가 시작되면, localhost:4000 으로 접근하여 페이지를 확인 할 수 있다.
 
-**jekyll-admin 플러그인 추가하기**
+**jekyll-admin 플러그인 추가하기**<br/>
 Gemfile 파일에 아래 코드를 추가해준다
 
 ```
