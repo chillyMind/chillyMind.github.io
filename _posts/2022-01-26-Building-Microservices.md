@@ -180,11 +180,6 @@ ATOM은 Atom Syndication Format과 Atom Publishcation Protocol을 지칭한다. 
 
 　이제 어떤 것이 부족하고 뭐를 공부해봐야 하는지 감이왔다. 문제는 공부해야할게 너무 많다는거다🤣.... 부지런히 하나하나 차근차근 공부해나가야겠다.
 
-<p align="center" style="color:gray">
-  <img src="/public/android-icon-48x48.png" style="padding:1;margin:1;">
-</p>
-
-
 # 후속포스트
 라고 쓰고 공부해야할 것이라 읽는다.
 * MSA와 gRPC
