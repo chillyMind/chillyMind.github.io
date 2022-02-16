@@ -52,4 +52,3 @@ Pytorch의 가이드가 꽤 잘되어있다. 설치환경들을 선택하고 ```
   <img src="/public/img/damedane_wooduck.gif" style="width:13rem;margin:1">
   🎤🐥
 </p>
-<hr/>
