@@ -21,7 +21,7 @@ tags: [일기,딥러닝]
 
 > AssertionError: Torch not compiled with CUDA enabled
 
-자연스럽게 한큐에 안된다😌 이 에러는 보통 (torch/torchvision 혹은 torchaudio/cudatoolkit)패키지들이 서로 버전이 맞지않아서 생기는 문제다.저번 토이프로젝트할때 세팅해놨어서 문제없을거라 생각했는데, 육안으로봐서는 딱히 문제되는 내용이 없어보이는데.... 아마 아까 패키지깔면서 뭔가 잘못 깔은듯 싶다.
+패키지깔고, 돌려봤는데 당연하게도 한큐에 안된다😌 이 에러는 보통 (torch/torchvision 혹은 torchaudio/cudatoolkit)패키지들이 서로 버전이 맞지않아서 생기는 문제다.저번 토이프로젝트할때 세팅해놨어서 문제없을거라 생각했는데, 육안으로봐서는 딱히 문제되는 내용이 없어보이는데.... 아마 아까 패키지깔면서 뭔가 잘못 깔은듯 싶다.
 
 어차피 다른 딥러닝 프로젝트도 없으니 새로 깔아버리자.
 <hr/>
@@ -30,7 +30,7 @@ tags: [일기,딥러닝]
   <img src="/public/img/torchnotcompiledwithcuda_tracking_1.PNG" style="padding:1;margin:1;">
   PyTorch 'Get Started' 도큐먼트의 <a href="https://pytorch.org/get-started/locally/">Started Locally</a> 가이드
 </p>
-Pytorch의 가이드가 꽤 잘되어있다. 환경에 맞춰서 선택하고 'Run this Command:'의 커맨드를 가져와서 실행한다.
+Pytorch의 가이드가 꽤 잘되어있다. 설치하려는 환경에 알맞게 선택하고 'Run this Command:'의 커맨드를 가져와서 실행한다.
 
 <hr/>
 
