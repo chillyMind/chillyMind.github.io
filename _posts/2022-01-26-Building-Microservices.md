@@ -121,9 +121,6 @@ ATOM은 Atom Syndication Format과 Atom Publishcation Protocol을 지칭한다. 
 
 * **반응형 확장 (Reactive eXtenstions) / 반응형 프로그래밍 (Rx Programming)**<br/>
 	　Rx는 다수의 호출 결과를 조합하고 그 결과에 따라 연산을 실행하는 메커니즘임. / Rx는 [관찰자(Observer) 패턴에 기반을 두고 설계됨](http://reactivex.io/intro.html){:target="blank"} / 관찰 대상 순서를 이용하여 비동기 이벤트 기반의 반응형 프로그램을 지원하는 라이브러리임. / 함수형 프로그래밍 라이브러리의 일종이다. / 다음은 RxJava 를 설명한 [포스트](https://12bme.tistory.com/570){:target="blank"}인데, Rx와 Rx 라이브러리의 개괄적인 부분들이 잘 설명해주셨다. <br/>
-	> 　함수형 프로그래밍은 부수 효과(side effect)가 없다. 콜백이나 옵저버 패턴이 스레드에 안전하지 않은 이유는 같은 자원에 여러 스레드가 경쟁 조건(race condition)에 빠지게 되었을때 예측할 수 없는 잘못된 결과가 나오기 때문이다. 이를 부수 효과라고 한다. 한두 개의 스레드가 있을때는 정상 동작하다가 수십 수백 개의 스레드가 동시에 단일 자원에 접근하면 계산 결과가 꼬이고 디버깅하기가 매우 어렵게 된다. <br/>
-	> 　함수형 프로그램이은 부수 효과가 없는 순수 함수(pure function)를 지향한다. 따라서 멀티 스레드 환경에서도 안전하다. 자바 언어로 리액티브 프로그래밍을 하기 위해서는 함수형 프로그래밍의 지원이 필요하다.<br/>
-	> 출처: [ [RxJava] RxJava 프로그래밍(1) - 리액티브 프로그래밍](https://12bme.tistory.com/570){:target="blank"}
 
  * **함수형 프로그래밍** <br/>
  　input 값을 바꾸지않은 채, output값을 새로만들어서 전달함. 다시 말해 모든 operation을 immutable로 만든다. / 때문에 Wasted Condition이 적다. 기존에는 Mutex걸고 별 난리를 쳤는데 이런걸 고려안해도된다. / 쓰레드가 많아지고, 분산처리가 많아질수록 함수형 프로그램이 각광 받을 수 밖에 없다. / [(포프TV, 함수형 프로그래밍, 2017)](https://www.youtube.com/watch?v=XoH9jzblxKQ){:target="blank"}
