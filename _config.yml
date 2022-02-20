@@ -12,6 +12,8 @@ author:
   name:              Jeoungwook Lee
   url:               https://chillyMind.github.io
   email:             do@visioninmind.net
+  
+excerpt_separator: <!--more-->
 
 # Gems
 plugins:
