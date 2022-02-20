@@ -5,6 +5,8 @@ tags: [일기,딥러닝]
 ---
 
 철지난 [다메다메 밈 제너레이터](https://github.com/Warhawk947/DameDaneGenerator){:target="blank"}를 돌려봤다. 
+<!--more-->
+
 <p align="center" style="color:gray">
   <img src="/public/img/damedane.gif" style="width:13rem;margin:1;display:inline">
   <img src="/public/img/damedane_taric.gif" style="width:13rem;margin:1;display:inline"><br/>

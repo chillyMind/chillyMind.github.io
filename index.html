@@ -4,9 +4,9 @@ title: Posts
 ---
 <div class="posts">
   {% for post in paginator.posts %}
-  <div class="post">
+  <div class="post-preview" onclick="location.href='{{ post.url | absolute_url }}'">
     <h1 class="post-title">
-      <a href="{{ post.url | absolute_url }}">
+      <a>
         {{ post.title }}
       </a>
     </h1>
@@ -18,7 +18,9 @@ title: Posts
       {% endfor %}
       </div>
     {% endif %}
-    <hr/>
+    <p>
+    {{ post.excerpt }}
+    </p>
   </div>
   {% endfor %}
 </div>
