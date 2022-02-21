@@ -1,0 +1,70 @@
+---
+title: MSA와 gRPC - (1) TCP/UDP 그리고 HTTP
+layout: post
+tags: [네트워크,HTTP,MSA,아키텍쳐,gRPC]
+---
+　이전 ['마이크로서비스 아키텍처 구축' 책읽기 포스트]({{site.url}}/2022/01/26/Building-Microservices/){:target="blank"}의 후속스터디 포스트로, gRPC에 대한 내용을 찾아보던 와중에 내가 몰랐던 최근(이라고하기엔 민망하지만) HTTP의 행보에 대한 내용들을 보게됐다. [HTTP의 3.0 버전](https://datatracker.ietf.org/doc/html/draft-ietf-quic-http-17){:target="blank"}이 UDP를 기반으로 발표됐다는 사실에 다소 당황스러웠다. 그 행보들을 역추적해야겠다는 생각에 발표배경서부터 기존 기술과 새로운 기술의 등장배경을 중심까지 차근차근 정리해보기 시작했다.<!--more-->
+
+　사실 기반 기술인 [QUIC (Quick UDP Internet Connections)](https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit){:target="blank"}이 이미 10년전에 발표된 기술이며 2015년부터 표준화가 물살을 타기시작하면서 나온 자연스러운 행보이기에, 이제서야 찾아보는 것은 다소 늦은감이 있다. 물론 HTTP3.0은 아직 인터넷 드래프트여서 지각비는 내지않아도 됨에 다행이면서도, 네트워크 관련 지식이라곤 학부시절의 기억에 머물러 트랜드 파악에 게을리한 것에 깊은 반성을 하게되었다. 기술의 진보는 모두 그 시대의 요구사항들로부터 출발한다. 당연하지만서도 무지성으로 공부하다보면 간과하기 쉬운 사실이다. 각 프로토콜들의 등장배경을 중심으로 통신프로토콜 역사를 훑어보며 차세대 아키텍쳐 패턴에 대한 예측들을 정리해본다.
+
+<hr/>
+
+# 우리나라 최초의 통신서비스
+　우리나라 최초로 상용화된 PC통신 서비스라 하면 '천리안'을 떠올릴 것이다. 이들이 서비스되던 시기를 'PC통신시대'라고 일컫기도 하는데, 바로 이 PC통신은 **TCP/IP** 기반으로 한 [Telnet](https://datatracker.ietf.org/doc/html/rfc854){:target="blank"} 프로토콜의 등장과 함께 시작됐다. 비디오텍스라고도 불리던 이것은 1980년대 중반부터 1990년대 중후반까지 상용 네트워크의 지위를 자리했으며, 우리나라엔 '천리안', '나우누리', '유니텔', '하이텔'등이 상용화되어 서비스됐다. 90년말에는 우리가 잘 아는 인터넷, 웹(W3)이 그 자리를 대신하게됐다. 웹 역시 **TCP/IP** 프로토콜 위의 **HTTP**를 기반했는데, 이런 통신 기술들의 기반 프로토콜로서 반세기가까이 군림하고있는 것이 바로 TCP이다.
+> - [천리안](https://newslibrary.naver.com/viewer/index.naver?articleId=1985062400099211021&editNo=1&printCount=1&publishDate=1985-06-24&officeId=00009&pageNo=11&printNo=5940&publishType=00020){:target="blank"}
+> - [비디오텍스](https://en.wikipedia.org/wiki/Videotex){:target="blank"}
+
+# 패킷교환방식 네트워크의 등장. TCP와 UDP
+　TCP의 등장은 60년대로 거슬러 올라간다. 그 시절 컴퓨터간 통신이라는걸 맨바닥에서 만들어내야했다면, 생각난 방법으로는 당연히 음성통화시스템에서 착안할 생각을 했을 것 같다. 실제로 **회선교환방식(circuit switching)**은 아날로그 전화망에서 착안되었는데, 당연하게도 당시 음성통화처럼 일대일 통신에 최적화되어있는게 사실이었다. 하지만 달리말하자면 회선독점을 통한 통신방식이었기에 복수의 참여자와 동시 네트워킹을 하기 어렵다는 제약이 있었고, 이는 낭비되는 컴퓨팅 또는 네트워크 자원에 대한 아쉬움이 생길 수 밖에 없었다. 이에 대한 아쉬움을 바탕으로 **패킷교환방식(packet switching)** 개념이 등장하게됐는데, 이 개념으로 만들어진 대표적 프로토콜들이 [TCP(전송제어프로토콜, Transmission Control Protocol)](https://datatracker.ietf.org/doc/html/rfc675){:target="blank"}와 [UDP(사용자 데이터그램 프로토콜, User Datagram Protocol)](https://datatracker.ietf.org/doc/html/rfc768){:target="blank"}다.
+
+　TCP와 달리 기존 프로토콜들은 신뢰성이 없었다. 중간에 알 수 없는 외부요인으로인한 데이터 손실 및 변형이 일어나더라도 이게 제대로 수·발신된건지 잘못된건지 알 길이 없었다. 특히나 패킷교환방식은 보내는 데이터가 패킷보다 크면 여러 패킷으로 나눠서 보내야하기에 수신되는 순서도 중요하다. 이러한 맹점들을 고려하여 설계된 TCP는 통신마다 수신자의 응답을 확인하며, 실패시 재전송까지 송부해버리는 '연결형' 프로토콜로서, 데이터의 손상과 오정렬을 방지하도록 설계되었다.
+
+　이 프로토콜은 추후 IP(Internet Procol)와 함께 모듈형식으로 활용되는데, OSI 7계층 중 각각 전송계층(4계층)과 네트워크계층(3계층)으로 나뉘어 활용되었다. 이는 [TCP/IP Protocol Suite 혹은 Internet Protocol Suite](https://en.wikipedia.org/wiki/Internet_protocol_suite){:target="blank"} 라고 불리기도 한다. TCP/IP 네트워크는 파일 전송 프로토콜인 FTP(File Transfer Protocol)와 메일링 프로토콜인 SMTP(Simple Mail Transfer Protocol)등의 기반이 됐으며, 90년대의 웹(W3) HTTP의 등장까지, 가장 인기있는 네트워크 프로토콜로 자리매김했다.
+
+> **OSI 7계층 모형**<br/>
+　각기 다른 HW/SW 환경의 네트워크 참여자들이 생겨났으며 이는 네트워크 참여자간의 약속이 필요해졌음을 얘기했다. 국제표준기구(ISO)와 국제전신전화자문위원회(CCITT)에서 각각 관리하고있던 표준 모델을 1983년에 합쳐서 정리를 시작했다. 그렇게 'OSI 7계층' 모델이 1984년에 표준모델로 정립되었으며, 대표 통신모델로서 무려 반세기가까이 굳건하게 자리매김해오고있다.
+
+　UDP는 TCP와 달리 수신자의 응답을 확인하지않으며 실패했더라도 재전송 역시 하지않는다. 혹자는 TCP에서 '신뢰성헤더'를 제거한 프로토콜이라고 설명하기도한다. 웹의 보급과 함께 다양한 서비스들이 만들어진 이후, 영상전송과 같은 '신뢰성이 항상 보장되지 않아도되는 환경'이나 응답 속도가 중요한 '구축되어있는 데디케이트 환경(대표적으로 게임)'에서 많이쓰인다. 특히 최근 넷플릭스나 유튜브와 같은 스트리밍 환경에서 많이 사용되고있으며, 서론에서 말했듯이 최근 QUIC의 등장을 중심으로한 HTTP3.0 발표로인해 새 패러다임의 핵으로서 떠오르고있다.
+
+# TCP와 UDP 등장이후의 세계
+　90년대에 들어서자 TCP/IP 혹은 UDP/IP 기반으로한 SMTP, VoIP 관련 프로토콜, FTP, HTTP 등 수많은 프로토콜을 쏟아내었다. 이 프로토콜 스텍들을 기반으로한 서비스들은 산업전반 뿐만아니라 생활방식에 크게 영향을 끼쳤는데, 이메일, 포럼, 커뮤니티, SNS, 전자상거래등 수많은 서비스들이 등장했다.
+
+　20세기말, 유럽입자물리연구소(Conseil Européen pour la Recherche Nucléaire, CERN)는 이미 유럽 최대의 인터넷 네트워크였었다. 재직자만 17,000여명이었으며 연구자들로부터 진행되고 성과가 나는 연구들이 어마어마했을 것이다. 이렇게 많은 연구들 간의 정보공유 필요성이 대두되던 시점에, 1980년에 CERN은 팀 버너스리에게 한 컨설팅을 맡긴다. 그는 노드간에 양방향 통신이 가능한 노트북 프로그램 'ENQUIRE'을 작성하는데, 이 프로그램을 근간으로 그는 추후 '전세계 대학과 연구소 과학자들 간의 정보공유를 위한 정보공유시스템'에 관련한 제안서를 작성한다. 이것이 1989년에 월드와이드웹(WWW)의 첫 제안서, [Information Management: A Proposal](https://www.w3.org/History/1989/proposal.html){:target="blank"}이다. 1990년에 5월에 두번째 제안서가 작성되고 같은해 11월에 경영제안으로 채택되었다.
+
+<p align="center" style="color:gray">
+  <img src="/public/img/msa-and-grpc-1-0.PNG" style="border:1px solid #eeeeee;padding: 1rem;margin:1rem;">
+  <a href="http://info.cern.ch/hypertext/WWW/TheProject.html" target="blank">1989년, 첫 World Wide Web의 모습</a>
+</p>
+
+　첫 WWW는 소수의 NeXT 컴퓨터 플랫폼에서만 접근할 수 있는 브라우저에서 사용가능했다. 추후 더 많은 시스템에서 실행 할 수 있는 브라우저를 개발하기시작했고, 1991년 버너스리는 ['Line Mode']("https://en.wikipedia.org/wiki/Line_Mode_Browser"){:target="blank"} 브라우저와 함께 WWW 소프트웨어를 릴리즈했다. CERN 컴퓨터를 사용하는 동료들이 사용할 수 있게 되었으며, 8월에는 인터넷 뉴스그룹들에 발표하면서 전세계의 이목을 끌었다. 12월에는 미국의 첫 웹서버로서, 폴 쿤츠와 루이스 애디스의 도움으로 캘리포니아의 스탠포트 선형입자가속기 센터에 웹서버를 열게되었다.
+
+<p align="center">
+    <a href="https://commons.wikimedia.org/wiki/File:Line_Mode_Browser_Wikipedia.png#/media/File:Line_Mode_Browser_Wikipedia.png">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Line_Mode_Browser_Wikipedia.png" alt="Line Mode Browser Wikipedia.png">
+    </a>
+    By <a href="https://de.wikipedia.org/wiki/Benutzer:Raphael_Kirchner" class="extiw" title="de:Benutzer:Raphael Kirchner">Raphael Kirchner</a> - <span class="int-own-work" lang="en">Own work</span> (<span lang="en" dir="ltr">Original text: selbst erstellt</span>), <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=10955544">Link
+    </a>
+</p>
+
+　'Line Mode' 브라우저는 이목을 끌긴했지만, 버너스리의 작은 WWW 팀만으로는 아쉽거나 추가적으로 필요한 요구사항들을 모두 구현해내기 어려웠다. 그는 다른 개발자가 참여를 할 수 있도록 탄원했으며, 이는 다양한 개인들의 참여로 다양한 브라우저 출범시키도록 촉발하였다. 특히 X-Window용의 브라우저와 Macintosh용 브라우저의 출시는 WWW의 확산에 중대한 임팩트를 주게됐는데, 1994년에 이르어서는 2천개의 상용서버을 포함하여 1만여개의 서버가 서비스되고 있었으며, 사용자는 1천만명에 이르게 되었다. 1993년에 CERN는 WWW를 로열티-프리로 제공하여 무료 소프트웨어로 만들고, 이듬해에 팀버너스리가 MIT로 자리를 옮겨 W3C를 설립하면서, 본격적인 공개 표준을 위한 행보들을 걷기 시작하여 지금까지 이어져 오고있다.
+
+
+>**HTTP의 진화**<br/>
+- HTTP 0.9 (1989)
+- HTTP 1.0 (1991)
+- HTTP 1.1 (1997)
+- HTTP 2.0 (2015)
+- HTTP 3.0 (~Internet Draft)
+<hr/>
+
+# 후속포스트
+- MSA와 gRPC - (2) HTTP의 진화와 QUIC
+
+<hr/>
+
+# 참조
+* Transmission Control Protocol, https://en.wikipedia.org/wiki/Transmission_Control_Protocol, 위키피디아
+* 인터넷의 역사, https://ko.wikipedia.org/wiki/%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%98_%EC%97%AD%EC%82%AC, 위키피디아
+* A Little History opf the World Wide Web, https://www.w3.org/People/Berners-Lee/History.html, w3.org
+* Web의 탄생, https://home.cern/science/computing/birth-web, CERN
+* A Short history of the Web, https://home.cern/science/computing/birth-web/short-history-web, CERN
