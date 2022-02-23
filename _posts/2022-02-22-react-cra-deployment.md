@@ -9,12 +9,12 @@ tags: [ReactJS, CRA, 배포]
 <!--more-->
 <hr/>
  **배포방법들** <br/>
- - Serve를 활용한 Static Server
+ - serve를 활용한 Static Server
  - Static Server 서빙
  - 상대경로를 설정하여 빌드
 <hr/>
 
-　`npm run build`를 활용하여 PROD용 빌드를 한다. 생성된 `build` 디렉토리의 `index.html`를 서빙하면되는데, 스프링이던 닷넷이던 서버 소프트웨어의 제약이 없으므로 원하는 HTTP 서버에 해당 `index.html`파일과 정적 캐시파일(`/static/js/main.<hash>.js` 등...)들을 요청할 수 있도록 셋업하면된다. 각 캐시파일에 대한 자세한 설명은 이 [섹션](https://create-react-app.dev/docs/production-build/){:target="blank"}를 참조하면된다.
+　`npm run build`를 활용하여 PROD용 빌드를 한다. 생성된 `build` 디렉토리의 `index.html`를 서빙하면되는데, 스프링이던 닷넷이던 서버 소프트웨어의 제약이 없으므로 원하는 HTTP 서버에 해당 `index.html`파일과 정적 캐시파일(`/static/js/main.<hash>.js` 등...)들을 요청할 수 있도록 셋업하면된다. 각 캐시파일에 대한 자세한 설명은 이 [섹션](https://create-react-app.dev/docs/production-build/){:target="blank"}을 참조하면된다.
 
 <hr/>
 
@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 
 app.listen(9000);
 ```
- 앞서말했듯이, 서버 소프트웨어에 제약이 없다. 우리의 CRA는 완전히 `platform-agnostic`🧐이기때문에, Node를 쓸 필요도 없다. `build` 폴더로 나오는 정적에셋들이 CRA의 유일한 아웃풋이다.
+ 앞서말했듯이, 서버 소프트웨어에 제약이 없다. 우리의 CRA는 완전히 `platform-agnostic`🧐이기때문에, 굳이 Node를 쓸 필요도 없다. `build` 폴더로 나오는 정적에셋들이 CRA의 유일한 아웃풋이다.
 <hr/>
 
 

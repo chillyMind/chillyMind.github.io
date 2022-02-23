@@ -1,7 +1,7 @@
 ---
 title: MSA와 gRPC - (1) TCP/UDP 그리고 HTTP
 layout: post
-tags: [네트워크,HTTP,MSA,아키텍쳐,gRPC]
+tags: [네트워크,웹의 역사]
 ---
 　이전 ['마이크로서비스 아키텍처 구축' 책읽기 포스트]({{site.url}}/2022/01/26/Building-Microservices/){:target="blank"}의 후속스터디 포스트로, gRPC에 대한 내용을 찾아보던 와중에 내가 몰랐던 최근(이라고하기엔 민망하지만) HTTP의 행보에 대한 내용들을 보게됐다. [HTTP의 3.0 버전](https://datatracker.ietf.org/doc/html/draft-ietf-quic-http-17){:target="blank"}이 UDP를 기반으로 발표됐다는 사실에 다소 당황스러웠다. 그 행보들을 역추적해야겠다는 생각에 발표배경서부터 기존 기술과 새로운 기술의 등장배경을 중심까지 차근차근 정리해보기 시작했다.<!--more-->
 
