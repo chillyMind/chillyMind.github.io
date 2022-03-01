@@ -3,9 +3,9 @@ title: "리액트 CRA의 배포 방법들"
 layout: post
 tags: [ReactJS, CRA, 배포]
 ---
-(작성중인 포스트)
+(작성중...)
 
-　요새 다양한 사용자의 클라이언트 환경에 대해서 고민하던 중, ReactJS 특히 CRA의 배포방법들 대해서 정리가 필요하겠다싶어 포스팅을 하게됐다. CRA 도큐먼트에 [Deployment](https://create-react-app.dev/docs/deployment/){:target="blank"} 관련하여 잘 정리되어있다. 본 포스트는 원문과는 많이 다르게 현재 내가 필요한 내용 위주로 생략·편집 그리고 의역하여 작성했다.
+　요새 다양한 사용자의 앱 구동환경에 대해서 고민하던 중, ReactJS 특히 CRA의 배포방법들 대해서 정리가 필요하겠다싶어 포스팅을 하게됐다. 요새 IDE들이 너무 잘되어있어서 프로젝트만들면 알아서 서버만들고 서빙 잘되길래 자세히 알아보려고 하지도않았던 것 같다. 이번 기회에 대충 알고있었던 도큐먼트를 정독하면서 내용을 확인했다. CRA 도큐먼트에 [Deployment](https://create-react-app.dev/docs/deployment/){:target="blank"} 관련하여 잘 정리되어있다. 본 포스트는 원문과는 많이 다르게 현재 내가 필요한 내용 위주로 생략·편집 그리고 의역하여 작성했다.
 <!--more-->
 <hr/>
  **배포방법들** <br/>
@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 
 app.listen(9000);
 ```
- 앞서말했듯이, 서버 소프트웨어에 제약이 없다. 우리의 CRA는 완전히 `platform-agnostic`🧐이기때문에, 굳이 Node를 쓸 필요도 없다. `build` 폴더로 나오는 정적에셋들이 CRA의 유일한 아웃풋이다.
+ 앞서말했듯이 서버 소프트웨어 제약이 없다. 우리의 CRA는 완전히 `platform-agnostic`🧐이기때문에, 굳이 Node로 정적서버를 구성할 필요도 없다. `build` 폴더로 나오는 정적에셋들이 CRA의 유일한 아웃풋이다.
 <hr/>
 
 

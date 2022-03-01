@@ -17,14 +17,14 @@ tags: [네트워크,웹의 역사]
 # 패킷교환방식 네트워크의 등장. TCP와 UDP
 　TCP의 등장은 60년대로 거슬러 올라간다. 그 시절 컴퓨터간 통신이라는걸 맨바닥에서 만들어내야했다면, 생각난 방법으로는 당연히 음성통화시스템에서 착안할 생각을 했을 것 같다. 실제로 **회선교환방식(circuit switching)**은 아날로그 전화망에서 착안되었는데, 당연하게도 당시 음성통화처럼 일대일 통신에 최적화되어있는게 사실이었다. 하지만 달리말하자면 회선독점을 통한 통신방식이었기에 복수의 참여자와 동시 네트워킹을 하기 어렵다는 제약이 있었고, 이는 낭비되는 컴퓨팅 또는 네트워크 자원에 대한 아쉬움이 생길 수 밖에 없었다. 이에 대한 아쉬움을 바탕으로 **패킷교환방식(packet switching)** 개념이 등장하게됐는데, 이 개념으로 만들어진 대표적 프로토콜들이 [TCP(전송제어프로토콜, Transmission Control Protocol)](https://datatracker.ietf.org/doc/html/rfc675){:target="blank"}와 [UDP(사용자 데이터그램 프로토콜, User Datagram Protocol)](https://datatracker.ietf.org/doc/html/rfc768){:target="blank"}다.
 
-　TCP와 달리 기존 프로토콜들은 신뢰성이 없었다. 중간에 알 수 없는 외부요인으로인한 데이터 손실 및 변형이 일어나더라도 이게 제대로 수·발신된건지 잘못된건지 알 길이 없었다. 특히나 패킷교환방식은 보내는 데이터가 패킷보다 크면 여러 패킷으로 나눠서 보내야하기에 수신되는 순서도 중요하다. 이러한 맹점들을 고려하여 설계된 TCP는 통신마다 수신자의 응답을 확인하며, 실패시 재전송까지 송부해버리는 '연결형' 프로토콜로서, 데이터의 손상과 오정렬을 방지하도록 설계되었다.
+　TCP와 달리 기존 프로토콜들은 신뢰성이 없었다. 중간에 알 수 없는 외부요인으로인한 데이터 손실 및 변형이 일어나더라도 이게 제대로 수·발신된건지 잘못된건지 알 길이 없었다. 특히나 패킷교환방식은 보내는 데이터가 패킷보다 크면 여러 패킷으로 나눠서 보내야하기에 수신되는 순서도 중요하다. 이러한 맹점들을 고려하여 설계된 TCP는 통신마다 수신자의 응답을 확인하며, 실패시 재전송까지 송부해버리는 프로토콜로서, 데이터의 손상과 오정렬을 방지하도록 설계되었다. '연결형' 프로토콜로서, TCP 프로토콜이 사용하는 로직은 3-Way Handshaking과 4-Way Handshaking을 활용한다. TCP Handshaking 관련해서 정말 잘 정리해주신 포스트가 있는데, 관련된 내용은 다음 [포스트](https://velog.io/@averycode/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-TCPUDP%EC%99%80-3-Way-Handshake4-Way-Handshake){:target="blank"}로 대신한다.
 
 　이 프로토콜은 추후 IP(Internet Procol)와 함께 모듈형식으로 활용되는데, OSI 7계층 중 각각 전송계층(4계층)과 네트워크계층(3계층)으로 나뉘어 활용되었다. 이는 [TCP/IP Protocol Suite 혹은 Internet Protocol Suite](https://en.wikipedia.org/wiki/Internet_protocol_suite){:target="blank"} 라고 불리기도 한다. TCP/IP 네트워크는 파일 전송 프로토콜인 FTP(File Transfer Protocol)와 메일링 프로토콜인 SMTP(Simple Mail Transfer Protocol)등의 기반이 됐으며, 90년대의 웹(W3) HTTP의 등장까지, 가장 인기있는 네트워크 프로토콜로 자리매김했다.
 
 > **OSI 7계층 모형**<br/>
 　각기 다른 HW/SW 환경의 네트워크 참여자들이 생겨났으며 이는 네트워크 참여자간의 약속이 필요해졌음을 얘기했다. 국제표준기구(ISO)와 국제전신전화자문위원회(CCITT)에서 각각 관리하고있던 표준 모델을 1983년에 합쳐서 정리를 시작했다. 그렇게 'OSI 7계층' 모델이 1984년에 표준모델로 정립되었으며, 대표 통신모델로서 무려 반세기가까이 굳건하게 자리매김해오고있다.
 
-　UDP는 TCP와 달리 수신자의 응답을 확인하지않으며 실패했더라도 재전송 역시 하지않는다. 혹자는 TCP에서 '신뢰성헤더'를 제거한 프로토콜이라고 설명하기도한다. 웹의 보급과 함께 다양한 서비스들이 만들어진 이후, 영상전송과 같은 '신뢰성이 항상 보장되지 않아도되는 환경'이나 응답 속도가 중요한 '구축되어있는 데디케이트 환경(대표적으로 게임)'에서 많이쓰인다. 특히 최근 넷플릭스나 유튜브와 같은 스트리밍 환경에서 많이 사용되고있으며, 서론에서 말했듯이 최근 QUIC의 등장을 중심으로한 HTTP3.0 발표로인해 새 패러다임의 핵으로서 떠오르고있다.
+　UDP는 TCP와 달리 수신자의 응답을 확인하지않으며 실패했더라도 재전송 역시 하지않는다. 혹자는 TCP에서 '신뢰성헤더'를 제거한 프로토콜이라고 설명하기도한다. 또한 '비연결형' 프로토콜이다. 때문에 TCP 처럼 연결/해제하는 과정이 당연히 존재하지 않기에 신뢰성이 상대적으로 낮다. 웹의 보급과 함께 다양한 서비스들이 만들어진 이후, 영상전송과 같은 '신뢰성이 항상 보장되지 않아도되는 환경'이나 응답 속도가 중요한 '구축되어있는 데디케이트 환경(대표적으로 게임)'에서 많이쓰인다. 특히 최근 넷플릭스나 유튜브와 같은 스트리밍 환경에서 많이 사용되고있으며, 서론에서 말했듯이 최근 QUIC의 등장을 중심으로한 HTTP3.0 발표로인해 새 패러다임의 핵으로서 떠오르고있다.
 
 # TCP와 UDP 등장이후의 세계
 　90년대에 들어서자 TCP/IP 혹은 UDP/IP 기반으로한 SMTP, VoIP 관련 프로토콜, FTP, HTTP 등 수많은 프로토콜을 쏟아내었다. 이 프로토콜 스텍들을 기반으로한 서비스들은 산업전반 뿐만아니라 생활방식에 크게 영향을 끼쳤는데, 이메일, 포럼, 커뮤니티, SNS, 전자상거래등 수많은 서비스들이 등장했다.
@@ -51,8 +51,8 @@ tags: [네트워크,웹의 역사]
 
 >**HTTP의 진화**<br/>
 - HTTP 0.9 (1989)
-- HTTP 1.0 (1991)
-- HTTP 1.1 (1997)
+- HTTP 1.0 (1996)
+- HTTP 1.1 (1997) - 첫 표준
 - HTTP 2.0 (2015)
 - HTTP 3.0 (~Internet Draft)
 <hr/>
@@ -63,8 +63,8 @@ tags: [네트워크,웹의 역사]
 <hr/>
 
 # 참조
-* Transmission Control Protocol, https://en.wikipedia.org/wiki/Transmission_Control_Protocol, 위키피디아
-* 인터넷의 역사, https://ko.wikipedia.org/wiki/%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%98_%EC%97%AD%EC%82%AC, 위키피디아
-* A Little History opf the World Wide Web, https://www.w3.org/People/Berners-Lee/History.html, w3.org
-* Web의 탄생, https://home.cern/science/computing/birth-web, CERN
-* A Short history of the Web, https://home.cern/science/computing/birth-web/short-history-web, CERN
+* (Transmission Control Protocol)[https://en.wikipedia.org/wiki/Transmission_Control_Protocol]{:target="blank"}, 위키피디아
+* (인터넷의 역사)[https://ko.wikipedia.org/wiki/%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%98_%EC%97%AD%EC%82%AC]{:target="blank"}, 위키피디아
+* (A Little History opf the World Wide Web)[https://www.w3.org/People/Berners-Lee/History.html]{:target="blank"}, w3.org
+* (Web의 탄생)[https://home.cern/science/computing/birth-web]{:target="blank"}, CERN
+* (A Short history of the Web)[https://home.cern/science/computing/birth-web/short-history-web]{:target="blank"}, CERN
