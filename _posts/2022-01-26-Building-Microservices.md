@@ -21,12 +21,16 @@ tags: [책읽기,MSA,아키텍쳐]
 *  기존 Monolithic 앱에서  의미있는 서비스(기능)단위를 공통 서비스로 묶어 재사용성을 장려하는 아키텍쳐
 *  서비스(모듈)간의 의존성을 최대한 줄임으로서, 느슨한 결합을 유지
 *  Biz service / Common biz service / insfrastructure service 등 서비스 별 계층 구조를 가지고있음
-*  서비스 수준의 재사용성을 추구한다는 점에서, MSA와 추구하는 가치/철학은 다르지 않음
+*  ~~서비스 수준의 재사용성을 추구한다는 점에서, MSA와 추구하는 가치/철학은 다르지 않음~~ (22.09.21. 개념이 조금 다르다..)
 
 　아래는 책에 묘사되어있는 내용은 아니다. 간략하게 Monolithic, SOA, MSA 각 패턴별 설계 주요특징을 도식화해봤다. 
 ![](/public/img/2022-01-26-Enterprise-Intergration-Patterns_0.PNG)
 
-　확실히 최근 MSA를 소개하는 내용들과 SOA의 주된내용이 크게 다르지않다. 그 때문인지 이 책에서는  SOA에서 MSA로 마이그레이션하는 예를 들기보다는 Monolithic에서 MSA로 마이그레이션하는 예시를 들며 설계기법을 설명해 나가고있다. 
+　확실히 최근 MSA를 소개하는 내용들과 SOA의 주된내용이 크게 다르지않다. 그 때문인지 이 책에서는  SOA에서 MSA로 마이그레이션하는 예를 들기보다는 Monolithic에서 MSA로 마이그레이션하는 예시를 들며 설계기법을 설명해 나가고있다.
+
+
+> **(22.09.21 추가)** <br/>
+　최근에 아키텍트 교육을 들으며 보고서를 오지게 쓰는 와중에, IBM 클라우드 블로그에서 SOA와 MSA에 대한 차이점을 설명해둔걸 찾았다. [SOA vs. Microservices: What’s the Difference?](https://www.ibm.com/cloud/blog/soa-vs-microservices) 두 개념이 단순하게 전후관계가 있는 내용인줄 알았으나. 내가 잘못된 접근법으로 이해하고있었던 것 같다. 이 [포스트(What is SOA (Service-Oriented Architecture)?))](https://www.ibm.com/kr-ko/cloud/learn/soa#toc-soa---pTXVnVY0)도 같이 읽으면 좋을 것 같다. 시간나는대로 별도 포스트로 한번 정리해보겠다.
 
 **은탄환은 없다. 아키텍트의 역할**<br/>
 　어떤 설계패턴이든 '은탄환'이 되는 설계는 없다.  각각을 재단하듯이 설명하려고 하지않는게 당연하다고 생각한다. 저자도 이를 중요시하며, 아키텍트의 역할에 대해 견고히 제시하고, 아키텍트는 '진화적 아키텍트'가 되어야한다고 강조한다.
@@ -186,5 +190,8 @@ ATOM은 Atom Syndication Format과 Atom Publishcation Protocol을 지칭한다. 
 * 블로킹과 논블로킹
 
 
+
+
+https://www.ibm.com/kr-ko/cloud/learn/soa#toc-soa---pTXVnVY0
 
 <hr/>
