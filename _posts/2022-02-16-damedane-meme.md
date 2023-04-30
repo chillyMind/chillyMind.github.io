@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "'다메다메 밈 제너레이터'를 돌려봤다"
-tags: [일기,딥러닝]
+tags: [일기,AI]
 ---
 
 철지난 [다메다메 밈 제너레이터](https://github.com/Warhawk947/DameDaneGenerator){:target="blank"}를 돌려봤다. 
